@@ -44,7 +44,9 @@ public class GameManager : MonoBehaviour
         {
             foreach (Touch touch in Input.touches)
             {
-                Instantiate(m_particulsPrefab, touch.position, m_particulsPrefab.transform.rotation);
+                Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+
+                Instantiate(m_particulsPrefab, touchPosition, m_particulsPrefab.transform.rotation);
             }
         }
     }
