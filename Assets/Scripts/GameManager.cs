@@ -9,13 +9,18 @@ public class GameManager : MonoBehaviour
     public bool m_isTouchableA;
     public bool m_isTouchableB;
     public int m_score;
-    [SerializeField] private GameObject m_particulsPrefab;
+    public GameObject m_indicator;
 
     void Awake()
     {
         instance = this;
         m_isTouchableA = false;
         m_isTouchableB = false;
+    }
+
+    private void Start()
+    {
+        m_indicator = 
     }
 
     public void ButtonToClick(bool p_type)//True = B, False = A
@@ -36,25 +41,6 @@ public class GameManager : MonoBehaviour
         //else m_score--;
 
         Debug.Log("score : " + m_score + ", boutton : " + p_type);
-    }
-
-    public void TouchVisualEffect()
-    {
-        if (Input.touchCount > 0)
-        {
-            foreach (Touch touch in Input.touches)
-            {
-                Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-
-                Instantiate(m_particulsPrefab, touchPosition, m_particulsPrefab.transform.rotation);
-            }
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        TouchVisualEffect();
     }
 
     // Update is called once per frame

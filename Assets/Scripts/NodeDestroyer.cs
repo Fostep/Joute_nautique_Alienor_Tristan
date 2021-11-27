@@ -6,7 +6,6 @@ public class NodeDestroyer : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D p_collision)
     {
-        Debug.Log("destroy");
         Destroy(p_collision.gameObject);
     }
 }
