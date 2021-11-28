@@ -26,7 +26,7 @@ public class IconMove : MonoBehaviour
     {
         if (p_other.GetComponent<RythmChecker>())
         {
-            GameManager.instance.ButtonToClick(m_iconType);
+            RythmGameManager.instance.ButtonToClick(m_iconType);
             m_image.color = Color.blue;
         }
     }
@@ -36,7 +36,7 @@ public class IconMove : MonoBehaviour
     {
         if (p_other.GetComponent<RythmChecker>())
         {
-            GameManager.instance.ButtonToUnclick(m_iconType);
+            RythmGameManager.instance.ButtonToUnclick(m_iconType);
             m_image.color = Color.white;
         }
     }
