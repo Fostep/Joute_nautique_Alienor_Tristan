@@ -12,16 +12,20 @@ public class Gyroscope_managing : MonoBehaviour
     private bool gyroEnabled;
     private Gyroscope gyro;
 
+    public bool m_start_moving;
+
     void Start()
     {
-        gyroEnabled = EnableGyro(); // Vérifie si le gyroscope peut être utilisé
+        gyroEnabled = true;//EnableGyro(); // Vérifie si le gyroscope peut être utilisé
+        m_start_moving = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gyroEnabled) // Si actif
+        if (gyroEnabled && m_start_moving) // Si actif
         {
+            Debug.Log("RENTRE DONC PAS OUF");
             Lance.transform.localRotation = GyroToUnity(gyro.attitude) * rota; // Rotation de la lance en fonction du gyro
         }
     }
@@ -33,8 +37,8 @@ public class Gyroscope_managing : MonoBehaviour
             gyro = Input.gyro; // Le gyroscope
             gyro.enabled = true; // Active le gyro
 
-            Lance.transform.rotation = Quaternion.Euler(90f, 90f, 0f); // Rotation au début pour mettre la lance dans le sens de visée
-            rota = new Quaternion(0, 0, 1, 0); // 1 sur axe Y
+            //Lance.transform.rotation = Quaternion.Euler(90f, 90f, 0f); // Rotation au début pour mettre la lance dans le sens de visée
+            //rota = new Quaternion(0, 0, 1, 0); // 1 sur axe Y
 
             return true;
         }

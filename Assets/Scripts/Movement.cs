@@ -5,26 +5,42 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 
 {
-    public Vector3 targetOffSet = Vector3.forward * 10f; // "distance à parcourir"
-    public float speed = 1f; // Vitesse
+    public float m_speed; // Vitesse
+    public bool m_active = false;
+    public Coroutine m_coco;
+
+    public GameObject m_player;
+
+    void Start()
+    {
+        m_active = true;
+        
+    }
+
     // Start is called before the first frame update
-    IEnumerator Start()
+    IEnumerator MoveForward()
     {
         // Then, pick our destination point offset from our current location.
-        Vector3 targetPosition = transform.position - targetOffSet; // position cible à atteindre
-
-        while(transform.position != targetPosition) // Tant que nous ne sommes pas arrivés
+        Vector3 m_targetPosition = new Vector3(transform.position.x, transform.position.y, m_player.transform.position.z); // position cible à atteindre
+        
+        while(transform.position != m_targetPosition) // Tant que nous ne sommes pas arrivés
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime); // Déplacer
+            transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, m_speed * Time.deltaTime); // Déplacer
             yield return null; // Continuer
         }
 
-        transform.position = targetPosition;
+        //transform.position = targetPosition;
     }
 
     // Update is called once per frame
-    void Update()
+    public void StopCOCO()
+    {
+        StopCoroutine(m_coco);
+    }
+
+    public void StartCOCO()
     {
         
+        m_coco = StartCoroutine(MoveForward()); // StopCoroutine(coco);
     }
 }
