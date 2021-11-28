@@ -6,18 +6,17 @@ using UnityEngine.UI;
 public class Gyroscope_managing : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject Lance; // Objet lance
-    private Quaternion rota; // Quaternion pour la rotation
+    private Quaternion m_rota; // Quaternion pour la rotation
 
-    private bool gyroEnabled;
-    private Gyroscope gyro;
+    private bool gyroEnabled; // Boolean pour vérifier si le gyroscope est activé
+    private Gyroscope m_gyro; // Le gyroscope
 
-    public bool m_start_moving;
+    public bool m_start_moving; // bool pour le déplacement 
 
     void Start()
     {
-        gyroEnabled = true;//EnableGyro(); // Vérifie si le gyroscope peut être utilisé
-        m_start_moving = false;
+        gyroEnabled =  EnableGyro(); // Vérifie si le gyroscope peut être utilisé
+        m_start_moving = false; 
     }
 
     // Update is called once per frame
@@ -25,8 +24,8 @@ public class Gyroscope_managing : MonoBehaviour
     {
         if (gyroEnabled && m_start_moving) // Si actif
         {
-            Debug.Log("RENTRE DONC PAS OUF");
-            Lance.transform.localRotation = GyroToUnity(gyro.attitude) * rota; // Rotation de la lance en fonction du gyro
+            // Debug.Log("RENTRE DONC PAS OUF");
+            transform.localRotation = GyroToUnity(m_gyro.attitude) * m_rota; // Rotation de la lance en fonction du gyro
         }
     }
 
@@ -34,11 +33,11 @@ public class Gyroscope_managing : MonoBehaviour
     {
         if (SystemInfo.supportsGyroscope)
         {
-            gyro = Input.gyro; // Le gyroscope
-            gyro.enabled = true; // Active le gyro
+            m_gyro = Input.gyro; // Le gyroscope
+            m_gyro.enabled = true; // Active le gyro
 
             //Lance.transform.rotation = Quaternion.Euler(90f, 90f, 0f); // Rotation au début pour mettre la lance dans le sens de visée
-            //rota = new Quaternion(0, 0, 1, 0); // 1 sur axe Y
+            m_rota = new Quaternion(0, 0, 1, 0); // 1 sur axe Y
 
             return true;
         }

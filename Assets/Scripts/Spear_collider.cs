@@ -10,15 +10,28 @@ public class Spear_collider : MonoBehaviour
 
     public GameObject m_enemy;
 
+    private Movement script_enemy;
+    private Gyroscope_managing script_gyro;
+
     public float m_multiplicateur = 1.0f; // Multiplicateur pour la barre de force
+
+    void Start()
+    {
+        script_enemy = m_enemy.GetComponent<Movement>();
+        script_gyro = GetComponent<Gyroscope_managing>();
+
+    }
 
     void OnTriggerEnter(Collider col)
     {
         if (!m_collision) // N'a pas encore touché le pavois
         {
             m_collision = true; // Touche
-            Movement script_enemy = m_enemy.GetComponent<Movement>();
-            script_enemy.StopCOCO();
+
+            script_enemy.StopCOCO(); // Stop le mouvement de l'enemie
+
+            script_gyro.m_start_moving = false; // Arretr le mouvement de la lance
+
             //Debug.Log(col.name);
 
             if (col.name == "Valid_Zone_0" || col.name == "Valid_Zone_1" || col.name == "Valid_Zone_2") // Touche une des bonnes parties du pavois
@@ -41,9 +54,10 @@ public class Spear_collider : MonoBehaviour
                 }
 
                 GameManager.instance.m_Game2_Result = m_multiplicateur;
-                Debug.Log(GameManager.instance.m_Game2_Result);
+                
+                //Debug.Log(GameManager.instance.m_Game2_Result);
 
-                GameManager.instance.NextGame();
+                GameManager.instance.NextGame(); // Lance le prochain mini - jeu
             }
 
             else if (col.name == "Invalid_zone") // Touche la mauvaise partie du pavois
@@ -52,10 +66,17 @@ public class Spear_collider : MonoBehaviour
                 {
                     m_invalid = true; //Touché invalide --> recommence
 
+                    m_collision = false; // Reset pour détecter la futur collision
+                    script_enemy.ResetPosition(); // Reset la position adverse
+                    script_gyro.m_start_moving = true; // Permet à la lance d'être bougée
+                    script_enemy.StartCOCO(); // Relance la routine de déplacement
+
                 }
                 else // A déjà touché la mauvaise partie
                 {
                     // Perd et recommence depuis le jeu précédent (rythme)
+                    m_invalid = true;
+                    m_collision = false;
                 }
             }
 

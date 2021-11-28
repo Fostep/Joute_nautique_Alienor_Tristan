@@ -9,12 +9,15 @@ public class Movement : MonoBehaviour
     public bool m_active = false;
     public Coroutine m_coco;
 
-    public GameObject m_player;
+    public GameObject m_player; // Joueur
+
+    private Vector3 m_initPosition; // Position initiale
 
     void Start()
     {
         m_active = true;
-        
+        m_initPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
     }
 
     // Start is called before the first frame update
@@ -32,7 +35,6 @@ public class Movement : MonoBehaviour
         //transform.position = targetPosition;
     }
 
-    // Update is called once per frame
     public void StopCOCO()
     {
         StopCoroutine(m_coco);
@@ -41,6 +43,11 @@ public class Movement : MonoBehaviour
     public void StartCOCO()
     {
         
-        m_coco = StartCoroutine(MoveForward()); // StopCoroutine(coco);
+        m_coco = StartCoroutine(MoveForward());
+    }
+
+    public void ResetPosition() // Reset l'objet à sa position initiale
+    {
+        transform.position = m_initPosition;
     }
 }

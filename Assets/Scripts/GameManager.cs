@@ -51,10 +51,10 @@ public class GameManager : MonoBehaviour
 
         if(m_turn == CurrentGame.GameTwo)
         {
-            Debug.Log("Lancement G2");
+            //Debug.Log("Lancement G2");
             m_enemy_G2.GetComponent<Movement>().StartCOCO();
             m_spear.GetComponent<Gyroscope_managing>().m_start_moving = true;
-            Debug.Log(m_spear.GetComponent<Gyroscope_managing>().m_start_moving);
+            //Debug.Log(m_spear.GetComponent<Gyroscope_managing>().m_start_moving);
         }
     }
 
