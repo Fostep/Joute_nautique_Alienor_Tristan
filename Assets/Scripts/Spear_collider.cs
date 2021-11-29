@@ -67,15 +67,15 @@ public class Spear_collider : MonoBehaviour
                     m_invalid = true; //Touché invalide --> recommence
 
                     m_collision = false; // Reset pour détecter la futur collision
-                    script_enemy.ResetPosition(); // Reset la position adverse
+                    script_enemy.ResetPosition("Mauvaise partie du pavois"); // Reset la position adverse
                     script_gyro.m_start_moving = true; // Permet à la lance d'être bougée
-                    script_enemy.StartCOCO(); // Relance la routine de déplacement
+                   
 
                 }
                 else // A déjà touché la mauvaise partie
                 {
                     // Perd et recommence depuis le jeu précédent (rythme)
-                    m_invalid = true;
+                    m_invalid = false;
                     m_collision = false;
                 }
             }

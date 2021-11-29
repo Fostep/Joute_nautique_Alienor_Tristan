@@ -31,7 +31,7 @@ public class Zone_condition_handler : MonoBehaviour
             m_bar.value = 0.1f;
         }
         
-            Debug.Log(m_active);
+            //Debug.Log(m_active);
 
         //m_bar.value = m_handlerNew; // Nouvelle position du handler
 
