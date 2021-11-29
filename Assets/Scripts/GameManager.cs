@@ -6,7 +6,10 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] public GameObject m_enemy_G2; // Enemie qu idémarre le jeu n 2
     [SerializeField] public GameObject m_spear; // Active mouvement lance
+    [SerializeField] public GameObject m_rythmGame; // Active mouvement lance
     public static GameManager instance;
+
+    [SerializeField] float m_game1Duration;
 
     public enum CurrentGame
     {
@@ -28,8 +31,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         m_turn = CurrentGame.Menu;
-        NextGame();
-
+        m_rythmGame.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,11 +53,23 @@ public class GameManager : MonoBehaviour
 
         if(m_turn == CurrentGame.GameTwo)
         {
+            m_rythmGame.SetActive(false);
             //Debug.Log("Lancement G2");
             m_enemy_G2.GetComponent<Movement>().StartCOCO();
             m_spear.GetComponent<Gyroscope_managing>().m_start_moving = true;
             //Debug.Log(m_spear.GetComponent<Gyroscope_managing>().m_start_moving);
         }
+
+        if (m_turn == CurrentGame.GameOne)
+        {
+            m_rythmGame.SetActive(true);
+            StartCoroutine(Game1Duration());
+        }
     }
 
+    IEnumerator Game1Duration()
+    {
+        yield return new WaitForSeconds(m_game1Duration);
+        NextGame();
+    }
 }

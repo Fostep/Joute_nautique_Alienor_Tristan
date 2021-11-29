@@ -13,6 +13,16 @@ public class RythmGameManager : MonoBehaviour
     public int m_score;
     public int m_scoreToAdd;
     public GameObject m_indicator;
+    public GameObject m_nodeGenerator;
+    private IndicationPop m_indicatorPop;
+    public int m_indicatorIndex;
+    
+
+    void StopCoco()
+    {
+        m_nodeGenerator.GetComponent<NodeGenerator>().StopAllCoroutines();
+        m_indicator.GetComponent<IndicationPop>().StopAllCoroutines();
+    }
 
     void Awake()
     {
@@ -23,6 +33,19 @@ public class RythmGameManager : MonoBehaviour
     {
         m_isTouchableR = false;
         m_isTouchableL = false;
+        m_indicatorPop = m_indicator.GetComponent<IndicationPop>();
+    }
+
+    public void StartGame()
+    {
+        m_nodeGenerator.GetComponent<NodeGenerator>().StartGame();
+    }
+
+    public void EndGame()
+    {
+        StopCoco();
+        GameObject himself = GetComponent<GameObject>();
+        himself.SetActive(false);
     }
 
     public void ButtonToClick(bool p_type, IconMove p_node)//True = Left, False = Right
@@ -40,7 +63,7 @@ public class RythmGameManager : MonoBehaviour
         }
     }
 
-    public void ButtonToUnclick(bool p_type)//True = B, False = A
+    public void ButtonToUnclick(bool p_type)//True = Left, False = Right
     {
         if (p_type)
         {
@@ -63,6 +86,7 @@ public class RythmGameManager : MonoBehaviour
             {
                 if (p_type) m_nodeL.m_hasBeenTouched = true;
                 else m_nodeR.m_hasBeenTouched = true;
+                m_indicatorPop.GiveIndication(m_indicatorIndex);
                 CountPoint();
             }
         }
@@ -73,10 +97,8 @@ public class RythmGameManager : MonoBehaviour
 
     private void CountPoint()
     {
-        Debug.Log(m_scoreToAdd);
         m_score += m_scoreToAdd;
         m_scoreToAdd = 0;
-
         Debug.Log("score : " + m_score);
     }
 }

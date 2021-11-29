@@ -42,7 +42,6 @@ public class Movement : MonoBehaviour
 
     public void StartCOCO()
     {
-        
         m_coco = StartCoroutine(MoveForward());
     }
 

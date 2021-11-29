@@ -15,7 +15,10 @@ public class NodeGenerator : MonoBehaviour
     {
         m_parentL = GameObject.Find("PartitionLeft");
         m_parentR = GameObject.Find("PartitionRight");
+    }
 
+    public void StartGame()
+    {
         InvokeRepeating("LaunchSpawn", 0f, m_intervalGeneration);
     }
 
