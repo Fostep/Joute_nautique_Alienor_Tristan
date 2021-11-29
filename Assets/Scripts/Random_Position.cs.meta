@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Scripts/RythmGame/IndicationPop.cs.meta
-guid: e68a5656d379d384c986c7b2bee850f1
-=======
-guid: 35b51f35da4d2854f8371e126f384f8e
->>>>>>> GyroscopeV2:Assets/Scripts/Force_button.cs.meta
+guid: fac5c1ffc0107f94384c6dde66d666d9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

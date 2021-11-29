@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 
@@ -8,8 +9,13 @@ public class Movement : MonoBehaviour
     public float m_speed; // Vitesse
     public bool m_active = false;
     public Coroutine m_coco;
+    public Coroutine m_coPos;
+
 
     public GameObject m_player; // Joueur
+
+    public GameObject m_message;
+    private Text m_message_text;
 
     private Vector3 m_initPosition; // Position initiale
 
@@ -17,7 +23,10 @@ public class Movement : MonoBehaviour
     {
         m_active = true;
         m_initPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        m_speed = 15.0f;
 
+        m_message_text = m_message.GetComponent<Text>(); //m_message.GetComponent<Renderer>().enabled = false; --> hide
+        m_message.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -32,6 +41,8 @@ public class Movement : MonoBehaviour
             yield return null; // Continuer
         }
 
+        StartReset("Vous avez manqué le pavois !");
+
         //transform.position = targetPosition;
     }
 
@@ -42,11 +53,38 @@ public class Movement : MonoBehaviour
 
     public void StartCOCO()
     {
+        m_message.SetActive(false);
+
+        if (m_coco != null)
+        {
+            StopCOCO();
+        }
+        
         m_coco = StartCoroutine(MoveForward());
+        m_message.GetComponent<Renderer>().enabled = false;
     }
 
-    public void ResetPosition() // Reset l'objet à sa position initiale
+    public IEnumerator ResetPosition(string p_message) // Reset pos objet et texte
     {
         transform.position = m_initPosition;
+        m_message.SetActive(true);
+        m_message_text.text = p_message;
+
+        yield return new WaitForSeconds(1.0f);
+
+        StartCOCO();
+
+    }
+
+    public void StartReset(string p_message)
+    {
+
+        if (m_coPos != null)
+        {
+            StopCoroutine(m_coPos);
+        }
+
+        m_coPos = StartCoroutine(ResetPosition(p_message));
+        
     }
 }
