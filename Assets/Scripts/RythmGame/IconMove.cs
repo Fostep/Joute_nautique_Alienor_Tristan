@@ -7,11 +7,16 @@ public class IconMove : MonoBehaviour
 {
 
     [SerializeField] private float m_speed;
+    [SerializeField] private Color m_color;
+    [SerializeField] private Color m_colorCanBeTouch;
+    public bool m_hasBeenTouched;
+
     public bool m_iconType;//True = B, False = A
     private Image m_image;
 
     private void Start()
     {
+        m_hasBeenTouched = false;
         m_image = gameObject.GetComponent<Image>();
     }
 
@@ -26,8 +31,8 @@ public class IconMove : MonoBehaviour
     {
         if (p_other.GetComponent<RythmChecker>())
         {
-            RythmGameManager.instance.ButtonToClick(m_iconType);
-            m_image.color = Color.blue;
+            RythmGameManager.instance.ButtonToClick(m_iconType, this);
+            m_image.color = m_colorCanBeTouch;
         }
     }
 
@@ -37,7 +42,7 @@ public class IconMove : MonoBehaviour
         if (p_other.GetComponent<RythmChecker>())
         {
             RythmGameManager.instance.ButtonToUnclick(m_iconType);
-            m_image.color = Color.white;
+            m_image.color = m_color;
         }
     }
 }

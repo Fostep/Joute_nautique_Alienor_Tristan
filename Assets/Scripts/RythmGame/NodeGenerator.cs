@@ -16,7 +16,7 @@ public class NodeGenerator : MonoBehaviour
         m_parentL = GameObject.Find("PartitionLeft");
         m_parentR = GameObject.Find("PartitionRight");
 
-        InvokeRepeating("LaunchSpawn", 0f, 0.5f);
+        InvokeRepeating("LaunchSpawn", 0f, m_intervalGeneration);
     }
 
     void LaunchSpawn()
@@ -26,21 +26,21 @@ public class NodeGenerator : MonoBehaviour
 
     IEnumerator NodeSpawn()
     {
-        yield return new WaitForSeconds(m_intervalGeneration);
-
         //Tire au sort
         GameObject nodePrefab = m_nodesPrefabs[Random.Range(0, m_nodesPrefabs.Length)];
 
         //Choix du parent
         IconMove node = nodePrefab.GetComponent<IconMove>();
         GameObject parent;
-        if (node.m_iconType) {parent = m_parentL;}
-        else {parent = m_parentR;}
+        if (node.m_iconType) { parent = m_parentL; }
+        else { parent = m_parentR; }
 
         //Instanciation
         GameObject nodeInstance;
-        nodeInstance  = Instantiate(nodePrefab, new Vector3(0f, 0f, 0f), transform.rotation);
+        nodeInstance = Instantiate(nodePrefab, new Vector3(0f, 0f, 0f), transform.rotation);
         nodeInstance.transform.SetParent(parent.transform, false);
+
+        yield return null;
     }
 
 }

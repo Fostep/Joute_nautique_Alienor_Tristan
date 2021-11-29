@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IndicationPop : MonoBehaviour
 {
@@ -25,8 +27,13 @@ public class IndicationPop : MonoBehaviour
 
     IEnumerator Fade(int p_index)
     {
-        yield return new WaitForSeconds(m_fadeTime);
+        TextMeshPro text = m_indications[p_index].GetComponent<TextMeshPro>();
+        while (text.color.a > 0.0f)
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - (Time.deltaTime * m_fadeTime));
+        }
         m_indications[p_index].SetActive(false);
+        yield return null;
     }
 
 }

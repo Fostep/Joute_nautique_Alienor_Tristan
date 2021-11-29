@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        m_turn = CurrentGame.GameOne;
+        m_turn = CurrentGame.Menu;
         NextGame();
 
     }
