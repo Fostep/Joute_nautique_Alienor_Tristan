@@ -36,6 +36,15 @@ public class Zone_handler : MonoBehaviour
         {
             m_targetNew = 0.0f; // Perdu
         }
+
+        if (m_bar.size == 1)
+        {
+            GameManager.instance.Victory();
+        }
+        else if (m_bar.size == 0)
+        {
+            GameManager.instance.Replay();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D p_col)

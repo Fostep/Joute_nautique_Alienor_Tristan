@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class Gyroscope_managing : MonoBehaviour
 {
+    [Header("Quaternion giro")]
+    [SerializeField] [Tooltip("exemple")] float x;
+    [SerializeField] float y;
+    [SerializeField] float z;
+    [SerializeField] float w;
+
     // Start is called before the first frame update
     private Quaternion m_rota; // Quaternion pour la rotation
 
@@ -24,8 +30,8 @@ public class Gyroscope_managing : MonoBehaviour
     {
         if (gyroEnabled && m_start_moving) // Si actif
         {
-            // Debug.Log("RENTRE DONC PAS OUF");
-            transform.localRotation = GyroToUnity(m_gyro.attitude) * m_rota; // Rotation de la lance en fonction du gyro
+            Quaternion quat = new Quaternion(x, y, z, w);
+            transform.localRotation = quat * (m_gyro.attitude * m_rota); // Rotation de la lance en fonction du gyro
         }
     }
 
@@ -36,7 +42,7 @@ public class Gyroscope_managing : MonoBehaviour
             m_gyro = Input.gyro; // Le gyroscope
             m_gyro.enabled = true; // Active le gyro
 
-            //Lance.transform.rotation = Quaternion.Euler(90f, 90f, 0f); // Rotation au début pour mettre la lance dans le sens de visée
+            transform.rotation = Quaternion.Euler(90f, 90f, 0f); // Rotation au début pour mettre la lance dans le sens de visée
             m_rota = new Quaternion(0, 0, 1, 0); // 1 sur axe Y
 
             return true;
@@ -44,9 +50,12 @@ public class Gyroscope_managing : MonoBehaviour
         return false;
     }
 
+
     // Change les valeurs du quaternion gyro à celui de Unity
     private static Quaternion GyroToUnity(Quaternion q)
     {
-        return new Quaternion(q.x, q.y, -q.z, -q.w);
+        //return new Quaternion(q.x, q.y, -q.z, -q.w);
+        return new Quaternion(q.x, q.y, 0, -q.w);
     }
+
 }

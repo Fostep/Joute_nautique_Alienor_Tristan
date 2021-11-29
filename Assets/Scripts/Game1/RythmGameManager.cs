@@ -13,17 +13,9 @@ public class RythmGameManager : MonoBehaviour
     public int m_score;
     public int m_scoreToAdd;
     public GameObject m_indicator;
-    public GameObject m_nodeGenerator;
     private IndicationPop m_indicatorPop;
     public int m_indicatorIndex;
     
-
-    void StopCoco()
-    {
-        m_nodeGenerator.GetComponent<NodeGenerator>().StopAllCoroutines();
-        m_indicator.GetComponent<IndicationPop>().StopAllCoroutines();
-    }
-
     void Awake()
     {
         instance = this;
@@ -38,14 +30,14 @@ public class RythmGameManager : MonoBehaviour
 
     public void StartGame()
     {
-        m_nodeGenerator.GetComponent<NodeGenerator>().StartGame();
+        GetComponent<NodeGenerator>().StartGame();
     }
 
     public void EndGame()
     {
-        StopCoco();
-        GameObject himself = GetComponent<GameObject>();
-        himself.SetActive(false);
+        GetComponent<NodeGenerator>().StopAllCoroutines();
+        m_indicator.GetComponent<IndicationPop>().StopAllCoroutines();
+        GetComponent<NodeGenerator>().StopInvoke();
     }
 
     public void ButtonToClick(bool p_type, IconMove p_node)//True = Left, False = Right

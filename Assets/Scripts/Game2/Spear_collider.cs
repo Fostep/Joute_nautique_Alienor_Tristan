@@ -54,29 +54,26 @@ public class Spear_collider : MonoBehaviour
                 }
 
                 GameManager.instance.m_Game2_Result = m_multiplicateur;
-                
-                //Debug.Log(GameManager.instance.m_Game2_Result);
-
                 GameManager.instance.NextGame(); // Lance le prochain mini - jeu
             }
 
-            else if (col.name == "Invalid_zone") // Touche la mauvaise partie du pavois
+            else if (col.name == "Invalid_Zone") // Touche la mauvaise partie du pavois
             {
-                if (!m_invalid) // N'a pas touché la mauvaise partie
+                Debug.Log("loupé");
+                if (!m_invalid) // Touche la mauvaise partie une premiere fois
                 {
                     m_invalid = true; //Touché invalide --> recommence
 
                     m_collision = false; // Reset pour détecter la futur collision
-                    script_enemy.ResetPosition("Mauvaise partie du pavois"); // Reset la position adverse
+                    script_enemy.StartReset("Mauvaise partie du pavois"); // Reset la position adverse
                     script_gyro.m_start_moving = true; // Permet à la lance d'être bougée
-                   
-
                 }
                 else // A déjà touché la mauvaise partie
                 {
                     // Perd et recommence depuis le jeu précédent (rythme)
                     m_invalid = false;
                     m_collision = false;
+                    GameManager.instance.Replay();
                 }
             }
 

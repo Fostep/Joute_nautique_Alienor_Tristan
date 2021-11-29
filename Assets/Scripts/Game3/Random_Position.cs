@@ -13,9 +13,4 @@ public class Random_Position : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y + y, transform.position.z);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
 
     public GameObject m_player; // Joueur
 
-    public GameObject m_message;
+    //public GameObject m_message;
     private Text m_message_text;
 
     private Vector3 m_initPosition; // Position initiale
@@ -25,10 +25,9 @@ public class Movement : MonoBehaviour
         m_initPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         m_speed = 15.0f;
 
-        m_message_text = m_message.GetComponent<Text>(); //m_message.GetComponent<Renderer>().enabled = false; --> hide
-        m_message.SetActive(false);
-    }
+        //m_message.SetActive(false); //m_message.GetComponent<Renderer>().enabled = false; --> hide
 
+    }
     // Start is called before the first frame update
     IEnumerator MoveForward()
     {
@@ -53,7 +52,7 @@ public class Movement : MonoBehaviour
 
     public void StartCOCO()
     {
-        m_message.SetActive(false);
+        //m_message.SetActive(false);
 
         if (m_coco != null)
         {
@@ -61,19 +60,18 @@ public class Movement : MonoBehaviour
         }
         
         m_coco = StartCoroutine(MoveForward());
-        m_message.GetComponent<Renderer>().enabled = false;
-    }
+        //m_message.SetActive(false);
+       }
 
     public IEnumerator ResetPosition(string p_message) // Reset pos objet et texte
     {
         transform.position = m_initPosition;
-        m_message.SetActive(true);
-        m_message_text.text = p_message;
+        //m_message.SetActive(true);
+        //m_message_text.text = p_message;
 
         yield return new WaitForSeconds(1.0f);
 
         StartCOCO();
-
     }
 
     public void StartReset(string p_message)
@@ -85,6 +83,5 @@ public class Movement : MonoBehaviour
         }
 
         m_coPos = StartCoroutine(ResetPosition(p_message));
-        
     }
 }

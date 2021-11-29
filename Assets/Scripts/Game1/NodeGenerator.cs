@@ -19,7 +19,13 @@ public class NodeGenerator : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("start game 1");
         InvokeRepeating("LaunchSpawn", 0f, m_intervalGeneration);
+    }
+    public void StopInvoke()
+    {
+        Debug.Log("Stop invoke");
+        CancelInvoke("LaunchSpawn");
     }
 
     void LaunchSpawn()

@@ -90,9 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 295fdfde2eaf9ea418c05cb60ce672c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 2
+  m_speed: 4
   m_color: {r: 0, g: 0.14509805, b: 0.48235297, a: 0}
   m_colorCanBeTouch: {r: 0.427451, g: 0.91372555, b: 1, a: 1}
+  m_hasBeenTouched: 0
   m_iconType: 1
 --- !u!58 &5163479359413400835
 CircleCollider2D:
