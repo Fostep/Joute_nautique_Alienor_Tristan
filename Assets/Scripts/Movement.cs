@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     {
         m_active = true;
         m_initPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        m_speed = 15.0f;
 
     }
 
