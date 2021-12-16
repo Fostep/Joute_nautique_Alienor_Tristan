@@ -10,6 +10,7 @@ public class Gyroscope_managing : MonoBehaviour
     [SerializeField] float y;
     [SerializeField] float z;
     [SerializeField] float w;
+    [SerializeField] float m_speed;
 
     // Start is called before the first frame update
     private Quaternion m_rota; // Quaternion pour la rotation
@@ -30,8 +31,11 @@ public class Gyroscope_managing : MonoBehaviour
     {
         if (gyroEnabled && m_start_moving) // Si actif
         {
+            Quaternion gyroQ = GyroToUnity(Input.gyro.attitude);
+            //Vector3 gyro = gyroQ.eulerAngles;
             Quaternion quat = new Quaternion(x, y, z, w);
-            transform.localRotation = quat * (m_gyro.attitude * m_rota); // Rotation de la lance en fonction du gyro
+            //transform.localRotation = quat * (m_gyro.attitude * m_rota); // Rotation de la lance en fonction du gyro
+            transform.rotation = Quaternion.Lerp(transform.rotation * quat, gyroQ * quat, Time.time * m_speed); // Rotation de la lance en fonction du gyro
         }
     }
 

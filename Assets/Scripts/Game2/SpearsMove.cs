@@ -87,7 +87,7 @@ public class SpearsMove : MonoBehaviour
             m_movementDirection = Vector3.zero;
             m_counterAction = 0.0f;
         }
-        else if(m_counterAction<= m_delayBetweenActions){
+        else if(m_counterAction <= m_delayBetweenActions){
             m_counterAction += Time.deltaTime;
         }
 
