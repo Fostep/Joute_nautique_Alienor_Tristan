@@ -7,10 +7,10 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] public GameObject m_enemy_G2; // Enemie qu idémarre le jeu n 2
     [SerializeField] public GameObject m_spear; // Active mouvement lance
-    [SerializeField] public GameObject m_rythmGame; // Active mouvement lance
-    [SerializeField] public GameObject m_menu; // Active mouvement lance
-    [SerializeField] public GameObject m_victoryScreen; // Active mouvement lance
-    [SerializeField] public GameObject m_strenghGame; // Active mouvement lance
+    [SerializeField] public GameObject m_rythmGame; // Ecran de jeu 1
+    [SerializeField] public GameObject m_menu;
+    [SerializeField] public GameObject m_victoryScreen;
+    [SerializeField] public GameObject m_strenghGame; // ecran jeu num3
     public static GameManager instance;
 
     [SerializeField] float m_game1Duration;
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        m_turn = CurrentGame.Menu;
+        //m_turn = CurrentGame.Menu;
         m_rythmGame.SetActive(false);
     }
 

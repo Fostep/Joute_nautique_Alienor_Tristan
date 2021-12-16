@@ -32,7 +32,7 @@ public class Movement : MonoBehaviour
     IEnumerator MoveForward()
     {
         // Then, pick our destination point offset from our current location.
-        Vector3 m_targetPosition = new Vector3(transform.position.x, transform.position.y, m_player.transform.position.z); // position cible à atteindre
+        Vector3 m_targetPosition = new Vector3(m_player.transform.position.x, transform.position.y, transform.position.z); // position cible à atteindre
         
         while(transform.position != m_targetPosition) // Tant que nous ne sommes pas arrivés
         {

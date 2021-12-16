@@ -24,7 +24,7 @@ public class IconMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.down * m_speed;
+        transform.Translate(Vector3.down * m_speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D p_other)
